@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psalms List</title>
+
+<style>
+body{font-family:Arial;background:#f4f6fb;margin:0}
+header{background:#1e3a8a;color:#fff;text-align:center;padding:20px;font-size:28px}
+.container{width:90%;max-width:1100px;margin:auto;padding:20px}
+.search-box{width:100%;padding:12px;border-radius:6px;border:1px solid #ccc;margin-bottom:20px}
+table{width:100%;border-collapse:collapse;background:#fff}
+th{background:#1e3a8a;color:#fff;padding:12px}
+td{padding:10px;border-bottom:1px solid #ddd;text-align:center}
+tr:hover{background:#f1f5ff}
+audio{width:140px}
+</style>
+</head>
+
+<body>
+
+<header>Book of Psalms</header>
+
+<div class="container">
+
+<input type="text" id="searchBar" class="search-box" placeholder="Search Psalms...">
+
+<table id="psalmTable">
+<thead>
+<tr>
+<th>No</th>
+<th>Psalm</th>
+<th>MP3</th>
+<th>Video</th>
+</tr>
+</thead>
+
+<tbody>
+
+<!-- ALL 150 ROWS -->
+
+<script>
+for(let i=1;i<=150;i++){
+document.write(`
+<tr>
+<td>${i}</td>
+<td><a href="plsam${i}.html">Psalm ${i}</a></td>
+<td><audio controls><source src="audio/psalm${i}.mp3"></audio></td>
+<td><a href="#">▶</a></td>
+</tr>
+`);
+}
+</script>
+
+</tbody>
+</table>
+
+</div>
+
+<script>
+// search
+document.getElementById("searchBar").addEventListener("keyup",function(){
+let v=this.value.toLowerCase();
+document.querySelectorAll("tbody tr").forEach(r=>{
+r.style.display=r.innerText.toLowerCase().includes(v)?"":"none";
+});
+});
+
+// one audio
+document.addEventListener("play",function(e){
+document.querySelectorAll("audio").forEach(a=>{
+if(a!==e.target)a.pause();
+});
+},true);
+</script>
+
+</body>
+</html>
+
